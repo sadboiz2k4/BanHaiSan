@@ -1,0 +1,118 @@
+
+.account-form .container{
+    width: calc(100% / 3);
+    height: calc(100% - 100px);
+    shadow: 0 0 10px #000;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+.title-form{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 50px;
+    border-bottom: solid 2px #ebebeb;
+}
+.introduction-form{
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    height: 75px;
+}
+.introduction-form .paragraph .boid-text{
+    font-weight: 700;
+}
+.introduction-form .paragraph .blue-text{
+    color: #2e9ed5;
+}
+.input-login{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+.input-login .input{
+    margin-bottom: 10px;
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    border: solid 2px #ebebeb;
+    font-size: 16px;
+    padding-left: 10px;
+}
+.button-form{
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    padding-bottom: 5px;
+}
+.button-form button{
+    width: 50%;
+    height: 40px;
+    background-color: #2e9ed5;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+.text-foot-form{
+    width: 100%;
+    height: 70px;
+    text-align: center;
+    align-content: center;
+    font-size: 16px;
+}
+.text-foot-form>p>a{
+    color: #2e9ed5;
+    text-decoration: none;
+}
+.change-login-method{
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+}
+.method-login{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 10px;
+}
+.method-login img{
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+    cursor: pointer;
+}
+.body-page{
+    margin-top: 163px;
+}
+.html,body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f4f4f4;
+}
+.page{
+    width:1200px ;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f5f5f5;
+}

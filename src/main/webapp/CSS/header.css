@@ -1,0 +1,182 @@
+.header-page .header-top{
+    height: 40px;
+    overflow: hidden;
+}
+.header-page .header-top img{
+    height: 40px;
+    width: 1200px;
+}
+
+.header-page .header-bottom .logo{
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header-page .header-bottom .logo img{
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+.header-bottom .search-bar{
+    width: 50%;
+    align-content: center;
+    position: relative;
+}
+.search .search-bar-input{
+    width: 80%;
+    height: 30px;
+    font-size: 16px;
+    border-radius: 3px;
+    border: none;
+}
+.search>form>.search-bar-button{
+    width: 15%;
+    height: 35px;
+    background-color: #0000000b;
+    border: none;
+    font-size: 16px;
+    color: rgb(231, 231, 231)
+}
+
+.number-phone-banner-ship{
+    width: 20%;
+    text-align: center;
+    align-content: center;
+    overflow: hidden;
+}
+.number-phone-banner-ship .number-phone{
+    font-size: 25px;
+    color: #fec519;
+    font-weight: 700;
+}
+.number-phone-banner-ship .banner-ship{
+    font-size: 25px;
+    color: #fff;
+    font-weight: 800;
+}
+.account-shopping-cart{
+    width: 15%;
+    align-content: center;
+    text-align: center;
+    color: #fff;
+}
+.account-shopping-cart .icon-text-account{
+    height: calc(60% - 5px);
+    width: 90%;
+    font-size: 16px;
+
+}
+.account-shopping-cart{
+    position: relative;
+}
+.account-header-icon{
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+.account-header-text{
+    color: #fff;
+    font-weight: 400;
+    text-decoration: none;
+    cursor: pointer;
+}
+.account-menu{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    text-align: left;
+    position: absolute;
+    top:40px;
+    left:40px;
+    width: calc(100% - 45px);
+    height: 80px;
+    border-radius: 5px;
+    overflow: hidden;
+    display: none;
+    z-index: 100;
+}
+.account-menu .account-menu-item{
+    width: 100%;
+    height: 40px;
+    padding-left: 10px;
+    background-color: #fff;
+}
+.account-menu .account-menu-item a{
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+}
+.account-menu .account-menu-item:hover a{
+    color: #ffffff;
+}
+.account-menu .account-menu-item:hover{
+    background-color: #20678b;
+}
+.account .icon-text-account:hover + .account-menu{
+    display: block;
+}
+.account:hover .account-menu {
+    display: block;
+}
+.shopping-cart{
+    height: calc(40% - 5px);
+    margin: 5px;
+    align-content: center;
+    text-align: center;
+}
+.shopping-cart .container .shopping-cart-icon{
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+.header-page{
+    height:163px ;
+    width: 100%;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    background-color: white;
+}
+.header-page .header-bottom{
+    height: 120px;
+    width: 1200px;
+    display: flex;
+    background-color: #2e9ed5;
+    border-radius: 5px;
+    overflow: visible  !important;
+}
+.promo{
+    width: 100%;
+    height: fit-content;
+    position: absolute;
+    left: 0;
+    top: 64%;
+
+
+}
+.promo>ul{
+    list-style-type: none;
+    width: 82%;
+    height: fit-content;
+    padding: 0;
+    margin: 0;
+    background-color: #f6f4f4;
+    border-radius: 5px;
+    /*overflow: hidden;*/
+    z-index: 1000;
+}
+.promo>ul>li{
+    width: 100%;
+    height: 30px;
+    padding-left: 20px;
+    align-content:center ;
+    border-bottom: solid 2px #0000000b;
+}
+.promo>ul>li:hover{
+    background-color: #2cbde5;
+    color: #fff;
+}
