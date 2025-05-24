@@ -1,0 +1,128 @@
+
+.title{
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 50px;
+    color: white;
+    background-color: #2e9ed5;
+    text-align: center;
+    align-content: center;
+}
+.container-order{
+    border: solid 3px #dedbdb;
+    width: 100%;
+    height: 500px;
+    overflow-y: auto;
+    border-radius: 10px;
+    padding: 10px;
+}
+.container-order>div{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border: solid 2px #e4e3e3;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.container-order>div>div.id{
+    width: 10%;
+    height: 100%;
+    font-size: 20px;
+    font-weight: 700;
+    align-content: center;
+    background-color: #2e9ed5;
+    color: #ffffff;
+    text-align: center;
+
+}
+.container-order>div>div.infor-basic{
+    width: 40%;
+    height: 100%;
+    align-content: center;
+}
+.container-order>div>div.status-total{
+    width: 40%;
+    height: 100%;
+    align-content: center;
+}
+.container-order>div>div.status-total>div{
+    width: 100%;
+    align-content: center;
+}
+.container-order>div>div.status-total>div.status{
+    height: 20%;
+}
+.container-order>div>div.status-total>div.status>span.status-new{
+    color: green;
+    font-weight: 700;
+}
+.container-order>div>div.status-total>div.total{
+    height: 80%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.container-order>div>div.status-total>div.total>span.total{
+    color: #ff2e1f;
+    font-size: 30px;
+    font-weight: 700;
+}
+.button-cancel-order{
+    width: 10%;
+    height: 100%;
+    align-content: center;
+    padding-right: 10px;
+}
+.button-cancel-order>button{
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+}
+.showall-btn{
+    width: 100%;
+    height: 50px;
+    align-content: center !important;
+    text-align: center !important;
+    border: none !important;
+}
+.showall-btn>button{
+    width: 200px;
+    height: 40px;
+    background-color: #2e9ed5;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+}
+.filter-order{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.filter-order>button{
+    width: 200px;
+    height: 40px;
+    background-color: #2e9ed5;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+}

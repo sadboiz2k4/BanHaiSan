@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+    <servlet>
+        <servlet-name>Home</servlet-name>
+        <servlet-class>com.example.project.Controller.Home</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <session-config>
+        <session-timeout>10080</session-timeout>
+    </session-config>
+
+    <servlet>
+        <servlet-name>GoogleCallback</servlet-name>
+        <servlet-class>com.example.project.Service.GoogleCallbackServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GoogleCallback</servlet-name>
+        <url-pattern>/oauth2callback/google</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FacebookCallback</servlet-name>
+        <servlet-class>com.example.project.Service.FacebookCallbackServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FacebookCallback</servlet-name>
+        <url-pattern>/oauth2callback/facebook</url-pattern>
+    </servlet-mapping>
+
+</web-app>
