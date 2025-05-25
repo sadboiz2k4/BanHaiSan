@@ -17,21 +17,38 @@ public class DaoProduct {
         this.conn = dao.getConn();
     }
 
-    //Load product
-    public List<String> findImgProdutc(int id) {
-        List<String> listImg = new ArrayList<>();
-        try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM ImgProducts WHERE ProductId = ?");
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                listImg.add(rs.getString("ImgURL"));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+//    //Load product
+//    public List<String> findImgProdutc(int id) {
+//        List<String> listImg = new ArrayList<>();
+//        try {
+//            PreparedStatement ps = conn.prepareStatement("SELECT * FROM ImgProducts WHERE ProductId = ?");
+//            ps.setInt(1, id);
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                listImg.add(rs.getString("ImgURL"));
+//            }
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return listImg;
+//    }
+//Load product
+public static List<String> findImgProdutc(int id) {
+    List<String> listImg = new ArrayList<>();
+    String sql = "SELECT * FROM ImgProducts WHERE ProductId = ?";
+
+    try {Connection conn = Dao.getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            listImg.add(rs.getString("ImgURL"));
         }
-        return listImg;
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
     }
+    return listImg;
+}
 
     public List<ProductTK> loadProductFromDB(ResultSet rs) {
         List<ProductTK> listProduct = new ArrayList<>();
@@ -52,7 +69,7 @@ public class DaoProduct {
         return listProduct;
     }
 
-    public List<ProductLarge> loadProductLargeFromDB(ResultSet rs) {
+    public static List<ProductLarge> loadProductLargeFromDB(ResultSet rs) {
         List<ProductLarge> listProduct = new ArrayList<>();
         try {
             while (rs.next()) {
@@ -119,13 +136,15 @@ public class DaoProduct {
         }
     }
 
-    public void loadDicountPricePL(List<ProductLarge> listProduct) {
+    public static void loadDicountPricePL(List<ProductLarge> listProduct) {
         for (ProductLarge product : listProduct) {
             int discountPrice = 0;
             int discountPencent = 0;
             int discountFixed = 0;
-            try {
-                PreparedStatement ps = conn.prepareStatement("SELECT DiscountType, DiscountValue FROM Promotions WHERE ProductID = ?");
+            String sql = "SELECT DiscountType, DiscountValue FROM Promotions WHERE ProductID = ?";
+
+            try {Connection conn = Dao.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setInt(1, product.getId());
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
@@ -531,6 +550,48 @@ public class DaoProduct {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    // [Bước 2.2.4] ProductService -> DaoProduct
+    public static List<ProductLarge> loadProductSearch(String valueSearch) {
+        List<ProductLarge> listProduct = new ArrayList<>();
+
+        // [Bước 2.2.5] DaoProduct -> Database
+        // Chuẩn bị câu lệnh SQL với từ khóa tìm kiếm
+        String sql = "SELECT products.*, categories.Name AS NameCategories, promotions.PromotionID " +
+                "FROM products LEFT JOIN promotions ON products.ProductID = promotions.ProductID " +
+                "INNER JOIN categories ON products.CategoriesID = categories.CategoriesID " +
+                "WHERE products.NameProduct LIKE ? OR promotions.Name LIKE ? OR categories.Name LIKE ? " +
+                "ORDER BY products.NameProduct LIKE ? DESC";
+
+        try (Connection conn = Dao.getConnection();  // Lấy kết nối MỚI từ Connection Pool
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            // Truyền tham số tìm kiếm
+            String searchParam = "%" + valueSearch + "%";
+            ps.setString(1, searchParam);
+            ps.setString(2, searchParam);
+            ps.setString(3, searchParam);
+            ps.setString(4, searchParam);
+
+            // [Bước 2.2.6] Database -> DaoProduct
+            // Thực thi câu lệnh SQL và nhận kết quả ResultSet
+            try (ResultSet rs = ps.executeQuery()) {
+
+                // [Bước 2.2.7] DaoProduct -> ProductService
+                // Chuyển đổi ResultSet thành danh sách ProductLarge
+                listProduct = loadProductLargeFromDB(rs);
+
+                // Gọi thêm hàm để tính và gán giá giảm giá cho sản phẩm (nếu có khuyến mãi)
+                loadDicountPricePL(listProduct);
+            }
+
+        } catch (SQLException e) {
+            // [Bước 2.2.10.a] Hiển thị thông báo khi không tìm thấy sản phẩm
+            throw new RuntimeException("Lỗi khi tìm kiếm sản phẩm", e);
+        }
+        // Trả về danh sách sản phẩm đã tìm được
+        return listProduct;
     }
 
     public static void main(String[] args) {

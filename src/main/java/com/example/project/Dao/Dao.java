@@ -17,6 +17,15 @@ public class Dao {
         }
         return connect;
     }
+
+    public static Connection getConnection() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/osdb", "root", "");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void closeConnection(Connection conn){
         try {
             conn.close();
@@ -34,10 +43,13 @@ public class Dao {
         this.conn = getConnection(url, user, password);
     }
 
-    public Dao() {
+//    public Dao() {
+//        this.conn = getConnection("jdbc:mysql://localhost:3306/osdb", "root", "");
+//    }
 
-        this.conn = getConnection("jdbc:mysql://localhost:3306/osdb", "root", "");
-    }
+public Dao() {
+    this.conn = getConnection();
+}
 
     public Connection getConn() {
         return conn;
