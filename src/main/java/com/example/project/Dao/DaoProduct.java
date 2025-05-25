@@ -294,7 +294,7 @@ public static List<String> findImgProdutc(int id) {
         return listProductFilter;
     }
 
-    public List<String> getCategoriesFromListProduct(List<ProductLarge> listProduct) {
+    public static List<String> getCategoriesFromListProduct(List<ProductLarge> listProduct) {
         HashSet<String> listCategories = new HashSet<>();
         for (ProductLarge product : listProduct) {
             listCategories.add(product.getCategories());
