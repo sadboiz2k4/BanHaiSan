@@ -20,9 +20,15 @@
         </div>
         <div class="search-bar">
             <div class="search">
+                <%-- [Bước 2.2.2] Search Interface -> SearchAll: searchProducts(valueSearch)
+               - Hành động: Gửi HTTP request đến /search-all?valueSearch=...
+               - Khi người dùng nhập từ khóa và nhấn nút tìm kiếm, form gửi yêu cầu GET đến servlet SearchAll, kèm tham số valueSearch.
+               --%>
                 <form action="search-all">
                     <input type="search" class="search-bar-input" placeholder="Tìm kiếm ............." name="valueSearch" autocomplete="off">
                     <button type="submit" class="search-bar-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <%--                     [Bước 2.2.3.a.2] hiện thị lỗi--%>
+                    <div id="error-message" style="color:red; margin-top:5px;"></div>
                 </form>
             </div>
             <div class="promo">
@@ -68,6 +74,18 @@
     let isLogin =${isLogin};
     let name = '${user.getFirstName()}${user.getLastName()}';
 
+</script>
+<script>
+    function validateSearch() {
+        const keyword = document.getElementById('keyword').value.trim();
+        if (keyword === '') {
+            document.getElementById('error-message').textContent = "Vui lòng nhập từ khóa tìm kiếm";
+            return false;  // Ngăn form submit
+        }
+        // Xóa thông báo lỗi nếu có
+        document.getElementById('error-message').textContent = "";
+        return true; // Cho phép form submit
+    }
 </script>
 <script src="js/header.js" defer></script>
 </body>
