@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddc029fc-a45e-4387-8a35-415cda03e798" name="Changes" comment="" />
+    <list default="true" id="ddc029fc-a45e-4387-8a35-415cda03e798" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/search.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/search.jsp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,6 +30,7 @@
     "git-widget-placeholder": "Mai",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/lykhang/FinalProject/Project/BanHaiSan-clean",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
