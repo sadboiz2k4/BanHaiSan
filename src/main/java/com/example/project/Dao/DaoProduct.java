@@ -602,4 +602,45 @@ public static List<String> findImgProdutc(int id) {
 
 
     }
+
+    public List<String> findPromoList(String valueFind) {
+        List<String> listPromo = new ArrayList<>();
+        List<String> listPromoNameProduct = new ArrayList<>();
+        List<String> listPromoCategories = new ArrayList<>();
+        List<String> listPromoPromotions = new ArrayList<>();
+
+        String sql ="SELECT DISTINCT Name FROM Promotions WHERE Name LIKE ?";
+
+        try {Connection conn = Dao.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + valueFind + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                listPromoPromotions.add(rs.getString("Name"));
+            }
+            ps = conn.prepareStatement("SELECT DISTINCT NameProduct FROM Products WHERE NameProduct LIKE ?;");
+            ps.setString(1, "%" + valueFind + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listPromoNameProduct.add(rs.getString("NameProduct"));
+            }
+            ps = conn.prepareStatement("SELECT DISTINCT Name FROM categories WHERE Name LIKE ?");
+            ps.setString(1, "%" + valueFind + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listPromoCategories.add(rs.getString("Name"));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        listPromo.addAll(listPromoPromotions);
+        listPromo.addAll(listPromoNameProduct);
+        listPromo.addAll(listPromoCategories);
+        dao.closeConnection(conn);
+        if (listPromo.size() > 10) {
+            return listPromo.subList(0, 10);
+        }
+        return listPromo;
+    }
 }
