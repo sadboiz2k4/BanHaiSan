@@ -1,0 +1,308 @@
+
+html,body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f4f4f4;
+}
+.page{
+    width:1200px ;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fafafa;
+}
+.cart-badge {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+.cart-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top : 5px;
+}
+
+.cart-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    margin: 10px 0;
+    background: #fff;
+}
+
+/* Optional: Add some hover effect to the cart item */
+.cart-item:hover {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.cart-item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+
+}
+
+.cart-item-details {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.cart-item-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.cart-item-weight {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.cart-item-price {
+    font-size: 16px;
+    color: #e31837;
+    font-weight: 600;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.quantity-btn {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+    transition: background-color 0.2s;
+}
+
+.quantity-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.quantity-display {
+    width: 50px;
+    text-align: center;
+    font-size: 16px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 8px 0;
+}
+
+/* Styles for close button */
+.delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 20px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+.note {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.note label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    height: 20px;
+    font-size: 18px;
+    padding-bottom: 12px;
+}
+
+.note textarea {
+    height: 70px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    resize: none;
+    background-color: #ededed;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #ff7200;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.checkout-btn:hover {
+    background-color: #ff2727;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between; /* Aligns the items within the flex container */
+    align-items: center; /* Vertically centers items */
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* You can also add this to reduce the margin between label and product count */
+
+.total-products-count {
+    margin-left: 5px;
+    margin-right: 10px; /* Adjust this value as needed */
+    color: #737070
+}
+
+/* Optional: Add a bit of space on the right side of the total amount */
+.total-amount {
+    margin-left: auto; /* Pushes the total amount to the right */
+    color: #ff0000; /* Example color for the total amount (change as needed) */
+    font-weight: bold; /* Makes the amount bold */
+}
+/* This will change the color of the total price text */
+.total-products-count::before {
+    content: "("; /* Add opening parenthesis */
+}
+
+.total-products-count::after {
+    content: "):"; /* Add closing parenthesis */
+}
+
+.delivery-container {
+    margin: 20px 0;
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.delivery-day-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #495057;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.delivery-day-select:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+/* Center button container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.continue-shopping-btn {
+    padding: 10px 20px;
+    background-color: #38c8f8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.continue-shopping-btn:hover {
+    background-color: #30b1d3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .top-bar {
+        flex-direction: column;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .cart-container {
+        padding: 10px;
+
+    }
+
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cart-item-image {
+        margin-bottom: 10px;
+    }
+
+    .cart-item-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .quantity-controls {
+        margin-bottom: 10px;
+    }
+
+}
