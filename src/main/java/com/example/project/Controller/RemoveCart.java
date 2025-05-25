@@ -17,7 +17,28 @@ public class RemoveCart extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int pid = -1;
+        try {
+            pid = Integer.parseInt(request.getParameter("productID"));
 
+        } catch (
+                NumberFormatException e) {
+            response.sendRedirect("show-cart");
+            return;
+        }
+        HttpSession session = request.getSession(true);
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null) {
+            response.sendRedirect("show-cart");
+            return;
+        }
+        cart.remove(pid);
+        session.setAttribute("cart", cart);
+        response.sendRedirect("show-cart");
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws
+            ServletException, IOException {
     }
 }

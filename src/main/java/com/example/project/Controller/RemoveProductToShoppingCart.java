@@ -19,6 +19,30 @@ public class RemoveProductToShoppingCart extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int productID = Integer.parseInt(req.getParameter("productID"));
+        HttpSession session = req.getSession();
+        List<OrderDetailTK> shoppingCart = (List<OrderDetailTK>) session.getAttribute("shoppingCart");
+        if(shoppingCart == null){
+            return;
+        }else{
+            int [] isExist = OrderDetailTK.isExistProductID(shoppingCart,productID);
+            if(isExist[0] == 0){
+                return;
+            }else{
+                if(isExist[1] == 1){
+                    shoppingCart.remove(isExist[2]);
+                }else{
+                    shoppingCart.get(isExist[2]).setQuantity(isExist[1]-1);
+                }
+            }
 
+        }
+
+        session.setAttribute("shoppingCart",shoppingCart);
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
     }
 }

@@ -14,12 +14,27 @@ import java.io.IOException;
 @WebServlet(name = "FilterOrder", value = "/filter-order")
 public class FilterOrder extends HttpServlet {
     @Override
-    public void init() throws ServletException {
-        super.init();
-    }
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String status = req.getParameter("status");
+        HttpSession session = req.getSession();
+        int id = (int)session.getAttribute("userID");
+        HandlerOrderDB handlerOrderDB = new HandlerOrderDB();
+        if(status.equals("Tất cả")){
+            req.setAttribute("listOrder", handlerOrderDB.getAllOrder(id));
+            for (Order order : handlerOrderDB.getAllOrder(id)) {
+                System.out.println(order.getOrderId());
+            }
+            req.getRequestDispatcher("/JspComForPersonal/order-comp.jsp").forward(req, resp);
+        }else{
+        req.setAttribute("listOrder", handlerOrderDB.filterStatusOrder(2,status));
+        req.getRequestDispatcher("/JspComForPersonal/order-comp.jsp").forward(req, resp);
+        }
+        handlerOrderDB.close();
 
+
+    }
+    @Override
+    public void destroy() {
+        super.destroy();
     }
 }
