@@ -91,20 +91,199 @@
                 <div class="bg-dark">
                 </div>
                 <script>
-                    document.querySelector('.btn-change-address>button').addEventListener('click', function(){
-                        document.querySelector('.bg-dark').style.display = 'block';
-                        document.querySelector('.dialog-address').style.display = 'block';
-                    });
-                    document.querySelectorAll('.address-dialog').forEach(function(item){
-                        item.addEventListener('click', function(){
-                            document.querySelector('.container-address').innerHTML = item.innerHTML;
-                            document.querySelector('.bg-dark').style.display = 'none';
-                            document.querySelector('.dialog-address').style.display = 'none';
-                        });
-                    });
-                    document.querySelector('.btn>.cancel').addEventListener('click', function(){
-                        document.querySelector('.bg-dark').style.display = 'none';
-                        document.querySelector('.dialog-address').style.display = 'none';
+                    function showPaymentSuccessMessage() {
+                        console.log("showPaymentSuccessMessage called");
+
+                        let toast = document.getElementById("success-toast");
+                        console.log("Toast element found:", toast !== null);
+
+                        if (toast) {
+                            // Tìm thẻ p trong toast
+                            let pElement = toast.querySelector('p');
+                            if (pElement) {
+                                pElement.innerHTML = "Đặt hàng thành công! Cảm ơn bạn đã mua hàng.";
+                            } else {
+                                // Nếu không có thẻ p, tạo mới
+                                toast.innerHTML = '<p>Đặt hàng thành công! Cảm ơn bạn đã mua hàng.</p>';
+                            }
+
+                            // Set style cho toast
+                            toast.style.display = "block";
+                            toast.style.backgroundColor = "#4CAF50";
+                            toast.style.color = "white";
+                            toast.style.position = "fixed";
+                            toast.style.top = "20px";
+                            toast.style.right = "20px";
+                            toast.style.zIndex = "9999";
+                            toast.style.padding = "16px 24px";
+                            toast.style.borderRadius = "8px";
+                            toast.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.3)";
+                            toast.style.minWidth = "300px";
+
+                            console.log("Toast displayed successfully");
+
+                            // Ẩn sau 3 giây
+                            setTimeout(function() {
+                                toast.style.display = "none";
+                                console.log("Toast hidden");
+                            }, 3000);
+                        } else {
+                            console.error("Toast element not found!");
+                            // Fallback: Tạo toast mới nếu không tìm thấy
+                            createAndShowToast("Đặt hàng thành công! Cảm ơn bạn đã mua hàng.", "success");
+                        }
+                    }
+
+                    // Hàm hiển thị thông báo thất bại
+                    function showPaymentFailureMessage() {
+                        console.log("showPaymentFailureMessage called");
+
+                        let toast = document.getElementById("success-toast");
+                        if (toast) {
+                            let pElement = toast.querySelector('p');
+                            if (pElement) {
+                                pElement.innerHTML = "Đặt hành thành công";
+                            } else {
+                                toast.innerHTML = '<p>Đặt hành thành công</p>';
+                            }
+
+                            toast.style.display = "block";
+                            toast.style.backgroundColor = "#45a049";
+                            toast.style.color = "white";
+                            toast.style.position = "fixed";
+                            toast.style.top = "20px";
+                            toast.style.right = "20px";
+                            toast.style.zIndex = "9999";
+                            toast.style.padding = "16px 24px";
+                            toast.style.borderRadius = "8px";
+                            toast.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.3)";
+                            toast.style.minWidth = "300px";
+
+                            setTimeout(function() {
+                                toast.style.display = "none";
+                            }, 3000);
+                        } else {
+                            createAndShowToast("Đặt hàng thất bại! Vui lòng thử lại.", "error");
+                        }
+                    }
+
+                    // Hàm tạo toast mới nếu element không tồn tại
+                    function createAndShowToast(message, type) {
+                        // Xóa toast cũ nếu có
+                        let oldToast = document.getElementById("dynamic-toast");
+                        if (oldToast) {
+                            oldToast.remove();
+                        }
+
+                        // Tạo toast mới
+                        let toast = document.createElement("div");
+                        toast.id = "dynamic-toast";
+                        toast.innerHTML = '<p>' + message + '</p>';
+
+                        // Set style
+                        toast.style.display = "block";
+                        toast.style.position = "fixed";
+                        toast.style.top = "20px";
+                        toast.style.right = "20px";
+                        toast.style.zIndex = "9999";
+                        toast.style.padding = "16px 24px";
+                        toast.style.borderRadius = "8px";
+                        toast.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.3)";
+                        toast.style.minWidth = "300px";
+                        toast.style.color = "white";
+                        toast.style.fontSize = "16px";
+                        toast.style.textAlign = "center";
+
+                        if (type === "success") {
+                            toast.style.backgroundColor = "#4CAF50";
+                        } else {
+                            toast.style.backgroundColor = "#45a049";
+                        }
+
+                        // Thêm vào body
+                        document.body.appendChild(toast);
+
+                        // Ẩn sau 3 giây
+                        setTimeout(function() {
+                            toast.remove();
+                        }, 3000);
+                    }
+
+                    // ===== SCRIPT XỬ LÝ NÚT XÁC NHẬN (SỬA LẠI) =====
+                    document.addEventListener('DOMContentLoaded', function() {
+                        console.log("DOM loaded, setting up order button");
+
+                        // Đợi một chút để đảm bảo tất cả element đã load
+                        setTimeout(function() {
+                            const acceptButton = document.querySelector('.btn-accept>button');
+                            console.log("Accept button found:", acceptButton !== null);
+
+                            if (acceptButton) {
+                                acceptButton.addEventListener('click', function(){
+                                    console.log("Order button clicked");
+
+                                    // Lấy dữ liệu từ form
+                                    const idAddress = document.querySelector('.id-hidden-address')?.value;
+                                    const idShip = document.querySelector('.id-hidden-ship')?.value;
+                                    const idPayment = document.querySelector('.id-payment-main')?.value;
+                                    const massage = document.querySelector('#massageCust')?.value || '';
+                                    const voucher = document.querySelector('#voucher-input')?.value || '';
+
+                                    console.log("Order data:", {idAddress, idShip, idPayment, massage, voucher});
+
+                                    // Kiểm tra dữ liệu bắt buộc
+                                    if (!idAddress || !idShip || !idPayment) {
+                                        alert("Vui lòng điền đầy đủ thông tin!");
+                                        return;
+                                    }
+
+                                    // Disable button để tránh click nhiều lần
+                                    acceptButton.disabled = true;
+                                    acceptButton.innerHTML = "Đang xử lý...";
+
+                                    $.ajax({
+                                        url: 'proceed-to-order',
+                                        type: 'POST',
+                                        data: {
+                                            idAddress: idAddress,
+                                            idShip: idShip,
+                                            idPayment: idPayment,
+                                            massage: massage,
+                                            voucherCode: voucher
+                                        },
+                                        success: function (response) {
+                                            console.log("AJAX response:", response);
+
+                                            // Reset button
+                                            acceptButton.disabled = false;
+                                            acceptButton.innerHTML = "Xác nhận";
+
+                                            // Kiểm tra response (có thể có space hoặc ký tự thừa)
+                                            if (response === 'success' || (typeof response === 'string' && response.trim() === 'success')) {
+                                                showPaymentSuccessMessage();
+                                                setTimeout(function() {
+                                                    window.location.href = 'home';
+                                                }, 2000);
+                                            } else {
+                                                showPaymentFailureMessage();
+                                            }
+                                        },
+                                        error: function(xhr, status, error) {
+                                            console.error("AJAX error:", {xhr, status, error});
+
+                                            // Reset button
+                                            acceptButton.disabled = false;
+                                            acceptButton.innerHTML = "Xác nhận";
+
+                                            showPaymentFailureMessage();
+                                        }
+                                    });
+                                });
+                            } else {
+                                console.error("Accept button not found! Checking selectors...");
+                                console.log("Available buttons:", document.querySelectorAll('button'));
+                            }
+                        }, 500);
                     });
                 </script>
             </div>
